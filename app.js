@@ -27,7 +27,7 @@ $(document).ready(function(){
       } else {
         $('#addressOutput').empty();
       }
-    
+      
     }, 200 );
 
   });
@@ -39,22 +39,22 @@ google.load('visualization', '1', {
 });
 
 function drawVisualization(addressQuery) {
-		var timer = 1;
-		console.log(addressQuery);
-    var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1DnK7kz9r3W2Jit0lU8TE7H8-4jOesD9_SHsEgEOrs4k/edit#gid=46921725'
+  var timer = 1;
+  console.log(addressQuery);
+  var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1DnK7kz9r3W2Jit0lU8TE7H8-4jOesD9_SHsEgEOrs4k/edit#gid=46921725'
     );
-    query.setQuery(addressQuery);
-    query.send(handleQueryResponse);
+  query.setQuery(addressQuery);
+  query.send(handleQueryResponse);
 }
 
 function handleQueryResponse(response) {
-    if (response.isError()) {
-        alert('error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
-        return;
-    }
-    var data = response.getDataTable();
-    visualization = new google.visualization.Table(
-		document.getElementById('addressOutput'));
-    visualization.draw(data, null);
-    var timer = null;
+  if (response.isError()) {
+    alert('error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+    return;
+  }
+  var data = response.getDataTable();
+  visualization = new google.visualization.Table(
+    document.getElementById('addressOutput'));
+  visualization.draw(data, null);
+  var timer = null;
 }
