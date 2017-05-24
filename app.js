@@ -36,6 +36,7 @@ $(document).ready(function(){
   google.load('visualization', '1', {
     packages: ['table']
   });
+});
 
   function drawVisualization(addressQuery) {
     var timer = 1;
@@ -58,4 +59,3 @@ $(document).ready(function(){
     var timer = null;
   }
 
-});
