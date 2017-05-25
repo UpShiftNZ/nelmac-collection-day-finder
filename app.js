@@ -13,7 +13,8 @@ $(document).ready(function(){
     delay(function(){
       var addressSearchInput = $('#addressSearch').val().toLowerCase();
       var addressQuery = '';
-      var streetInput = addressSearchInput.substr(addressSearchInput.indexOf(' ')+1);
+      var streetInput = (addressSearchInput.indexOf(' ') > 0) ? addressSearchInput.substr(addressSearchInput.indexOf(' ')+1) : '';
+      console.log(streetInput);
       if(addressSearchInput.length > 2){
         if(streetInput.length > 2){
           addressQuery = 'SELECT A,C,B,D WHERE (LOWER(A) LIKE "%'+addressSearchInput+'%") OR (LOWER(A) LIKE "%'+streetInput+'%" AND B IS NOT NULL) ORDER BY B DESC LIMIT 10';
@@ -34,9 +35,6 @@ $(document).ready(function(){
   
 });
 
-google.load('visualization', '1', {
-  packages: ['table']
-});
 
 function drawVisualization(addressQuery) {
   var timer = 1;
