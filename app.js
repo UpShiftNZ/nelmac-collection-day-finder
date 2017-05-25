@@ -37,7 +37,6 @@ $(document).ready(function(){
 
 
 function drawVisualization(addressQuery) {
-  var timer = 1;
   console.log(addressQuery);
   var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1DnK7kz9r3W2Jit0lU8TE7H8-4jOesD9_SHsEgEOrs4k/edit#gid=46921725'
     );
@@ -51,8 +50,10 @@ function handleQueryResponse(response) {
     return;
   }
   var data = response.getDataTable();
-  visualization = new google.visualization.Table(
-    document.getElementById('addressOutput'));
-  visualization.draw(data, null);
-  var timer = null;
+  if(data.getNumberOfRows() < 1){
+    $('#addressOutput').html('No Address Match Found on Pick-up Routes.');
+  } else {
+    visualization = new google.visualization.Table(document.getElementById('addressOutput'));
+    visualization.draw(data, null);
+  };
 }
